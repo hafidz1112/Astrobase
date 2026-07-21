@@ -2,6 +2,7 @@ const express = require("express")
 const supabase = require("@supabase/supabase-js")
 
 const app = express()
+app.use(express.json())
 const PORT = 3211 || process.env.PORT
 
 const SUPABASE_URL = "https://agnfjisdxohqwlacptvr.supabase.co"
@@ -13,6 +14,14 @@ app.get("/", async(request, response) => {
     response.json({ 
         getBlog 
     })
+})
+
+app.post("/", async(request, respoons) => {
+    const {title, description} =  request.body
+    console.log(title, description)
+    const createPost = await db.from("blog").insert({title, description})
+    console.log("data berhasil di tambahkan :", createPost)
+    respoons.json({ createPost })
 })
 
 app.listen(PORT, () => {
