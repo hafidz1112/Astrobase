@@ -10,8 +10,9 @@ const db = supabase.createClient(SUPABASE_URL, SUPABASE_SERVICE_ROLE)
 
 app.get("/", async(request, response) => {
     const getBlog = await db.from("blog").select()
-    console.log(getBlog)
-    response.json({ getBlog })
+    response.json({ 
+        getBlog 
+    })
 })
 
 app.listen(PORT, () => {
